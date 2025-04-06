@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">AT SOPT ANDROID</string>
+
+    <!--top bar-->
+    <string name="top_bar_back_button_content_description">뒤로가기</string>
+
+    <!--textfield-->
+    <string name="textfield_id">아이디</string>
+    <string name="textfield_password">비밀번호</string>
+
+    <!--button-->
+    <string name="button_sign_in">로그인하기</string>
+    <string name="button_sign_up">회원가입</string>
+    <string name="button_find_id">아이디 찾기</string>
+    <string name="button_find_password">비밀번호 찾기</string>
+
+    <!--SignIn-->
+    <string name="sign_in_title">TVING ID 로그인</string>
+    <string name="sign_in_description">이 사이트는 Google reCAPTCHA로 보호되며,\nGoogle 개인정보 처리방침과 서비스 약관이 적용됩니다.</string>
+    <string name="title_activity_sigh_up">SighUpActivity</string>
+    <string name="title_activity_my">MyActivity</string>
+    <string name="password_content_description">비밀번호 visible 여부</string>
 </resources>

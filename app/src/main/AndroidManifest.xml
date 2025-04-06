@@ -13,7 +13,17 @@
         android:theme="@style/Theme.ATSOPTANDROID"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.ui.MyActivity"
+            android:exported="false"
+            android:label="@string/title_activity_my"
+            android:theme="@style/Theme.ATSOPTANDROID" />
+        <activity
+            android:name=".presentation.ui.SignUpActivity"
+            android:exported="false"
+            android:label="@string/title_activity_sigh_up"
+            android:theme="@style/Theme.ATSOPTANDROID" />
+        <activity
+            android:name=".presentation.ui.SignInActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ATSOPTANDROID">
