@@ -44,7 +44,6 @@ import org.sopt.at.core.component.TvingBasicTextField
 import org.sopt.at.core.component.TvingTopBar
 import org.sopt.at.presentation.ui.ui.theme.ATSOPTANDROIDTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
-import kotlin.jvm.java
 
 class SignInActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +63,7 @@ fun SignInScreen(
 ) {
     var id by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
     Column(
         modifier = modifier
@@ -140,6 +140,8 @@ fun SignInScreen(
                 color = colors.gray200,
                 fontSize = 16.sp,
                 modifier = Modifier.clickable {
+                    val intent = Intent(context, SignUpActivity::class.java)
+                    context.startActivity(intent)
                 }
             )
         }
