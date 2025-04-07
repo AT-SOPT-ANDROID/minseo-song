@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.sopt.at.R
-import org.sopt.at.presentation.ui.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
 
 @Composable
@@ -32,7 +32,7 @@ fun TvingTopBar(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewTvingTopBar() {
-    ATSOPTANDROIDTheme {
+    TvingTheme {
         TvingTopBar()
     }
 }

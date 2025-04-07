@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.R
 import org.sopt.at.core.util.noRippleClickable
-import org.sopt.at.presentation.ui.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.ui.theme.TvingTheme
 
 @Composable
 fun TvingButton(
@@ -61,7 +61,7 @@ fun TvingButton(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewTvingButton() {
-    ATSOPTANDROIDTheme {
+    TvingTheme {
         TvingButton(
             label = stringResource(R.string.button_sign_in),
             onClick = {}

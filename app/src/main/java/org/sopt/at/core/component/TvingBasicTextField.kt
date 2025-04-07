@@ -14,7 +14,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.sopt.at.presentation.ui.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
 
 @Composable
@@ -60,7 +60,7 @@ fun TvingBasicTextField(
 @Preview(showBackground = true)
 @Composable
 fun TvingBasicTextFieldPreview() {
-    ATSOPTANDROIDTheme {
+    TvingTheme {
         TvingBasicTextField(
             value = "",
             onValueChange = {},

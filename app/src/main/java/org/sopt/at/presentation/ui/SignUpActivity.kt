@@ -7,14 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.sopt.at.presentation.ui.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.ui.theme.TvingTheme
 
 class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ATSOPTANDROIDTheme {
+            TvingTheme {
                 SignUpScreen()
             }
         }
@@ -30,8 +30,8 @@ fun SignUpScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    ATSOPTANDROIDTheme {
+fun PreviewSignUpScreen() {
+    TvingTheme {
         SignUpScreen()
     }
 }

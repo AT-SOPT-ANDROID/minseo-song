@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +39,8 @@ import org.sopt.at.core.component.PasswordTextField
 import org.sopt.at.core.component.TvingBasicTextField
 import org.sopt.at.core.component.TvingButton
 import org.sopt.at.core.component.TvingTopBar
-import org.sopt.at.presentation.ui.ui.theme.ATSOPTANDROIDTheme
+import org.sopt.at.core.util.noRippleClickable
+import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
 
 class SignInActivity : ComponentActivity() {
@@ -48,7 +48,7 @@ class SignInActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ATSOPTANDROIDTheme {
+            TvingTheme {
                 SignInScreen()
             }
         }
@@ -126,7 +126,7 @@ fun SignInScreen(
                 text = stringResource(R.string.button_sign_up),
                 color = colors.gray200,
                 fontSize = 16.sp,
-                modifier = Modifier.clickable {
+                modifier = Modifier.noRippleClickable{
                     val intent = Intent(context, SignUpActivity::class.java)
                     context.startActivity(intent)
                 }
@@ -159,7 +159,7 @@ fun SignInScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewSignInScreen() {
-    ATSOPTANDROIDTheme {
+    TvingTheme {
         SignInScreen()
     }
 }
