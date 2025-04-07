@@ -12,22 +12,25 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.at.R
+import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
 
 @Composable
 fun TvingTopBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onBackClicked: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
             .padding(20.dp)
             .fillMaxWidth()
-    ){
+    ) {
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.baseline_arrow_back_24),
             contentDescription = stringResource(R.string.top_bar_back_button_content_description),
-            tint = colors.gray100
+            tint = colors.gray100,
+            modifier = Modifier.noRippleClickable(onBackClicked)
         )
     }
 }
