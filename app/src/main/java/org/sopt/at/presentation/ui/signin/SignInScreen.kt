@@ -1,11 +1,6 @@
-package org.sopt.at.presentation.ui
+package org.sopt.at.presentation.ui.signin
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,22 +33,10 @@ import org.sopt.at.R
 import org.sopt.at.core.component.PasswordTextField
 import org.sopt.at.core.component.TvingBasicTextField
 import org.sopt.at.core.component.TvingButton
-import org.sopt.at.core.component.TvingTopBar
 import org.sopt.at.core.util.noRippleClickable
+import org.sopt.at.presentation.ui.signup.SignUpActivity
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
-
-class SignInActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            TvingTheme {
-                SignInScreen()
-            }
-        }
-    }
-}
 
 @Composable
 fun SignInScreen(
@@ -66,12 +49,8 @@ fun SignInScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(color = Color.Black)
             .padding(horizontal = 20.dp)
     ) {
-        TvingTopBar(modifier = Modifier.padding(vertical = 20.dp))
-        Spacer(Modifier.height(20.dp))
-
         Text(
             text = stringResource(R.string.sign_in_title),
             color = Color.White,
@@ -163,4 +142,3 @@ private fun PreviewSignInScreen() {
         SignInScreen()
     }
 }
-

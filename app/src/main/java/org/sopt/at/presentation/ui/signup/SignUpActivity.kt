@@ -1,4 +1,4 @@
-package org.sopt.at.presentation.ui
+package org.sopt.at.presentation.ui.signup
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

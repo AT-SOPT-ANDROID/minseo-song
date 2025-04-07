@@ -2,12 +2,22 @@ package org.sopt.at.ui.theme
 
 import android.app.Activity
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+
+private val DarkColorScheme = darkColorScheme(
+    background = Color.Black,
+    surface = Color.Black,
+    onBackground = Color.White,
+    onSurface = Color.White,
+    primary = Color.Red
+)
 
 object TvingTheme {
     val colors: TvingColors
@@ -43,6 +53,7 @@ fun TvingTheme(
             }
         }
         MaterialTheme(
+            colorScheme = DarkColorScheme,
             content = content
         )
     }
