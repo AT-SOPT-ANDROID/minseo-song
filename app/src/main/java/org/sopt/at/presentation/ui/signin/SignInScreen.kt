@@ -1,6 +1,5 @@
 package org.sopt.at.presentation.ui.signin
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,12 +33,28 @@ import org.sopt.at.core.component.PasswordTextField
 import org.sopt.at.core.component.TvingBasicTextField
 import org.sopt.at.core.component.TvingButton
 import org.sopt.at.core.util.noRippleClickable
-import org.sopt.at.presentation.ui.signup.SignUpActivity
 import org.sopt.at.ui.theme.TvingTheme
+import androidx.hilt.navigation.compose.hiltViewModel
 import org.sopt.at.ui.theme.TvingTheme.colors
 
 @Composable
-fun SignInScreen(
+fun SignInRoute(
+    navigateSignUp: () -> Unit,
+    navigateMyPage: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: SignInViewModel = hiltViewModel(),
+) {
+    SignInScreen(
+        onSignInClick = navigateMyPage,
+        onSignUpClick = navigateSignUp,
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun SignInScreen(
+    onSignInClick: () -> Unit,
+    onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var id by remember { mutableStateOf("") }
@@ -75,7 +90,7 @@ fun SignInScreen(
 
         TvingButton(
             label = stringResource(R.string.button_sign_in),
-            onClick = {  },
+            onClick = onSignInClick,
             isDisabled = id.isEmpty() || password.isEmpty(),
             modifier = Modifier.fillMaxWidth()
         )
@@ -105,10 +120,7 @@ fun SignInScreen(
                 text = stringResource(R.string.button_sign_up),
                 color = colors.gray200,
                 fontSize = 16.sp,
-                modifier = Modifier.noRippleClickable{
-                    val intent = Intent(context, SignUpActivity::class.java)
-                    context.startActivity(intent)
-                }
+                modifier = Modifier.noRippleClickable(onSignUpClick)
             )
         }
         Spacer(Modifier.height(40.dp))
@@ -139,6 +151,9 @@ fun SignInScreen(
 @Composable
 private fun PreviewSignInScreen() {
     TvingTheme {
-        SignInScreen()
+        SignInScreen(
+            onSignInClick = {},
+            onSignUpClick = {}
+        )
     }
 }
