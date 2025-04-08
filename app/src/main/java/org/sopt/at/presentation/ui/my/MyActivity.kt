@@ -26,7 +26,7 @@ class MyActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        TvingTopBar()
+                        TvingTopBar(isMyPage = true)
                     }
                 ) { innerPadding ->
                     MyRoute(

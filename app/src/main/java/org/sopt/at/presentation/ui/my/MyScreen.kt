@@ -71,7 +71,7 @@ fun MyScreen(
             ) {
                 AsyncImage(
                     model = profileImage,
-                    contentDescription = stringResource(R.string.my_profile_description),
+                    contentDescription = stringResource(R.string.my_profile_content_description),
                     modifier = Modifier
                         .size(90.dp)
                         .clip(shape = RoundedCornerShape(10.dp))
@@ -86,7 +86,7 @@ fun MyScreen(
                 )
 
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_mode_24),
+                    painter = painterResource(id = R.drawable.ic_mode_24),
                     contentDescription = stringResource(R.string.my_profile_edit_button),
                     tint = colors.gray200,
                     modifier = Modifier

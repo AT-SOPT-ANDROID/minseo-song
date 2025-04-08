@@ -3,6 +3,8 @@
 
     <!--top bar-->
     <string name="top_bar_back_button_content_description">뒤로가기</string>
+    <string name="top_bar_notification_button_content_description">알람</string>
+    <string name="top_bar_setting_button_content_description">설정</string>
 
     <!--textfield-->
     <string name="textfield_id">아이디</string>
@@ -31,7 +33,7 @@
     <string name="sign_up_toast_password">비밀번호는 영문, 숫자, 특수문자 조합 8~15자리여야 합니다.</string>
 
     <!--My-->
-    <string name="my_profile_description">프로필 이미지</string>
+    <string name="my_profile_content_description">프로필 이미지</string>
     <string name="my_profile_change_button">프로필 전환</string>
     <string name="my_profile_edit_button">프로필 수정</string>
     <string name="my_logout_button">로그아웃</string>
