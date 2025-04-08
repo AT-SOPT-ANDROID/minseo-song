@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
-import org.sopt.at.core.component.TvingTopBar
+import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.presentation.ui.signin.ID_KEY
 import org.sopt.at.ui.theme.TvingTheme
 

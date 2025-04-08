@@ -1,4 +1,4 @@
-package org.sopt.at.core.component
+package org.sopt.at.core.component.textfield
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Icon

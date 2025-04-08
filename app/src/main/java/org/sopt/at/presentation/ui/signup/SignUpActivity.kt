@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.at.R
-import org.sopt.at.core.component.TvingButton
-import org.sopt.at.core.component.TvingTopBar
+import org.sopt.at.core.component.button.TvingButton
+import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.core.util.toast
 import org.sopt.at.presentation.ui.signin.ID_KEY
 import org.sopt.at.presentation.ui.signin.PASSWORD_KEY

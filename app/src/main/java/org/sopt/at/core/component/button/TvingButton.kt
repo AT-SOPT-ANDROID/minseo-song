@@ -1,4 +1,4 @@
-package org.sopt.at.core.component
+package org.sopt.at.core.component.button
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

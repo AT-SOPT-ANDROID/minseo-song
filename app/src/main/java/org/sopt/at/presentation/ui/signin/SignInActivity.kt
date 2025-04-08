@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.sopt.at.R
-import org.sopt.at.core.component.TvingTopBar
+import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.presentation.ui.my.MyActivity
 import org.sopt.at.presentation.ui.signup.SignUpActivity
 import org.sopt.at.ui.theme.TvingTheme

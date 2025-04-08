@@ -1,4 +1,4 @@
-package org.sopt.at.core.component
+package org.sopt.at.core.component.topbar
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
