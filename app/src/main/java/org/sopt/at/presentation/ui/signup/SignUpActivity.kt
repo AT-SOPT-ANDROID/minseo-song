@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.at.R
-import org.sopt.at.core.component.button.TvingButton
+import org.sopt.at.core.component.button.TvingSignButton
 import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.core.util.toast
 import org.sopt.at.presentation.ui.signin.ID_KEY
@@ -46,19 +46,19 @@ class SignUpActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        TvingButton(
+                        TvingSignButton(
                             label = stringResource(R.string.button_sign_up_next),
                             onClick = {
                                 if (signUpState == 1) {
                                     if (!viewModel.isIdValid(id)){
                                         toast(R.string.sign_up_toast_id)
-                                        return@TvingButton
+                                        return@TvingSignButton
                                     }
                                     viewModel.nextStep()
                                 } else {
                                     if (!viewModel.isPasswordValid(password)){
                                         toast(R.string.sign_up_toast_password)
-                                        return@TvingButton
+                                        return@TvingSignButton
                                     }
                                     setResult(RESULT_OK, Intent().apply {
                                         putExtra(ID_KEY, id)

@@ -20,7 +20,7 @@ import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.ui.theme.TvingTheme
 
 @Composable
-fun TvingButton(
+fun TvingSignButton(
     label: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -60,9 +60,9 @@ fun TvingButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewTvingButton() {
+private fun PreviewTvingSignButton() {
     TvingTheme {
-        TvingButton(
+        TvingSignButton(
             label = stringResource(R.string.button_sign_in),
             onClick = {}
         )

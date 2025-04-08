@@ -29,7 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import org.sopt.at.R
 import org.sopt.at.core.component.textfield.PasswordTextField
 import org.sopt.at.core.component.textfield.TvingBasicTextField
-import org.sopt.at.core.component.button.TvingButton
+import org.sopt.at.core.component.button.TvingSignButton
 import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
@@ -97,7 +97,7 @@ private fun SignInScreen(
         )
         Spacer(Modifier.height(20.dp))
 
-        TvingButton(
+        TvingSignButton(
             label = stringResource(R.string.button_sign_in),
             onClick = onSignInClick,
             isDisabled = id.isEmpty() || password.isEmpty(),
