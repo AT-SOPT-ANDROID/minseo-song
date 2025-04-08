@@ -51,7 +51,6 @@ fun SignInRoute(
         onPasswordChange = viewModel::updatePassword,
         onSignInClick = {
             navigateMyPage(id, password)
-            viewModel.clearData()
         },
         onSignUpClick = {
             navigateSignUp()
