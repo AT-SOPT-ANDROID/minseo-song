@@ -11,13 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -28,39 +25,52 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import org.sopt.at.R
 import org.sopt.at.core.component.PasswordTextField
 import org.sopt.at.core.component.TvingBasicTextField
 import org.sopt.at.core.component.TvingButton
 import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.ui.theme.TvingTheme
-import androidx.hilt.navigation.compose.hiltViewModel
 import org.sopt.at.ui.theme.TvingTheme.colors
 
 @Composable
 fun SignInRoute(
     navigateSignUp: () -> Unit,
-    navigateMyPage: () -> Unit,
+    navigateMyPage: (String, String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SignInViewModel = hiltViewModel(),
 ) {
+    val id by viewModel.id.collectAsState()
+    val password by viewModel.password.collectAsState()
+
     SignInScreen(
-        onSignInClick = navigateMyPage,
-        onSignUpClick = navigateSignUp,
+        id = id,
+        onIdChange = viewModel::updateId,
+        password = password,
+        onPasswordChange = viewModel::updatePassword,
+        onSignInClick = {
+            navigateMyPage(id, password)
+            viewModel.clearData()
+        },
+        onSignUpClick = {
+            navigateSignUp()
+            viewModel.clearData()
+        },
         modifier = modifier
     )
 }
 
 @Composable
 private fun SignInScreen(
+    id: String,
+    onIdChange: (String) -> Unit,
+    password: String,
+    onPasswordChange: (String) -> Unit,
     onSignInClick: () -> Unit,
     onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var id by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    val context = LocalContext.current
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -76,7 +86,7 @@ private fun SignInScreen(
 
         TvingBasicTextField(
             value = id,
-            onValueChange = { id = it },
+            onValueChange = onIdChange,
             hint = stringResource(R.string.textfield_id),
             imeAction = ImeAction.Next
         )
@@ -84,7 +94,7 @@ private fun SignInScreen(
 
         PasswordTextField(
             value = password,
-            onValueChange = { password = it }
+            onValueChange = onPasswordChange
         )
         Spacer(Modifier.height(20.dp))
 
@@ -152,6 +162,10 @@ private fun SignInScreen(
 private fun PreviewSignInScreen() {
     TvingTheme {
         SignInScreen(
+            id = "",
+            onIdChange = {},
+            password = "",
+            onPasswordChange = {},
             onSignInClick = {},
             onSignUpClick = {}
         )

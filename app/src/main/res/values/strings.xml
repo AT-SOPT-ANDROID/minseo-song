@@ -13,6 +13,7 @@
     <string name="button_sign_up">회원가입</string>
     <string name="button_find_id">아이디 찾기</string>
     <string name="button_find_password">비밀번호 찾기</string>
+    <string name="button_sign_up_next">다음</string>
 
     <!--SignIn-->
     <string name="sign_in_title">TVING ID 로그인</string>
@@ -20,4 +21,10 @@
     <string name="title_activity_sigh_up">SighUpActivity</string>
     <string name="title_activity_my">MyActivity</string>
     <string name="password_content_description">비밀번호 visible 여부</string>
+    <string name="sign_in_failed">로그인에 실패하였습니다.</string>
+
+    <!--SignUp-->
+    <string name="sign_up_title">%s를 입력해주세요.</string>
+    <string name="sign_up_id_description">영문 소문자 또는 영문 소문자, 숫자 조합 6~12자리</string>
+    <string name="sign_up_password_description">영문, 숫자, 특수문자(~!@#$%^&amp;*) 조합 8~15자리</string>
 </resources>
