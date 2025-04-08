@@ -52,11 +52,15 @@ dependencies {
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
+    debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.androidx.compose.navigation)
+
+    // Coil
+    implementation(libs.coil)
 
     // Hilt
     implementation(libs.hilt.android)

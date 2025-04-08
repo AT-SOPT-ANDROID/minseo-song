@@ -19,6 +19,8 @@ import org.sopt.at.R
 import org.sopt.at.core.component.TvingButton
 import org.sopt.at.core.component.TvingTopBar
 import org.sopt.at.core.util.toast
+import org.sopt.at.presentation.ui.signin.ID_KEY
+import org.sopt.at.presentation.ui.signin.PASSWORD_KEY
 import org.sopt.at.ui.theme.TvingTheme
 
 @AndroidEntryPoint
@@ -59,8 +61,8 @@ class SignUpActivity : ComponentActivity() {
                                         return@TvingButton
                                     }
                                     setResult(RESULT_OK, Intent().apply {
-                                        putExtra("id", id)
-                                        putExtra("password", password)
+                                        putExtra(ID_KEY, id)
+                                        putExtra(PASSWORD_KEY, password)
                                     })
                                     finish()
                                 }

@@ -14,12 +14,16 @@ ksp = "2.0.0-1.0.24"
 
 # Jetpack Compose
 activityCompose = "1.9.3"
+uiTooling = "1.7.8"
 composeBom = "2024.04.01"
 androidxComposeNavigation = "2.8.9"
 hiltNavigationCompose = "1.2.0"
 
 # Dependency Injection
 hilt = "2.51.1"
+
+# Coil
+coil = "2.2.2"
 
 # Logging
 timber = "5.0.1"
@@ -54,8 +58,12 @@ accompanist-systemuicontroller = { group = "com.google.accompanist", name = "acc
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 
+# Coil
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
 # Logging
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 
 [plugins]
