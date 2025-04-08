@@ -3,6 +3,7 @@ package org.sopt.at.presentation.ui.my
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import org.sopt.at.R
+import org.sopt.at.core.component.button.TvingButton
 import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
@@ -32,6 +34,7 @@ import org.sopt.at.ui.theme.TvingTheme.colors
 @Composable
 fun MyRoute(
     id: String,
+    navigateSignIn: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MyViewModel = hiltViewModel(),
 ) {
@@ -40,6 +43,7 @@ fun MyRoute(
     MyScreen(
         id = id,
         profileImage = profileImage,
+        onLogoutClick = navigateSignIn,
         modifier = modifier
     )
 }
@@ -48,19 +52,21 @@ fun MyRoute(
 fun MyScreen(
     id: String,
     profileImage: String,
+    onLogoutClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.padding(horizontal = 20.dp)
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Row(
-                modifier = Modifier
-                    .padding(vertical = 20.dp)
-                    .fillMaxWidth(),
+                modifier = Modifier.padding(vertical = 20.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AsyncImage(
@@ -75,7 +81,7 @@ fun MyScreen(
                     text = id,
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
+                    fontSize = 20.sp,
                     modifier = Modifier.padding(start = 20.dp)
                 )
 
@@ -85,13 +91,23 @@ fun MyScreen(
                     tint = colors.gray200,
                     modifier = Modifier
                         .padding(start = 4.dp)
-                        .noRippleClickable{}
+                        .noRippleClickable {}
                 )
-
             }
 
+            TvingButton(
+                label = stringResource(R.string.my_profile_change_button),
+                onClick = {}
+            )
         }
 
+        TvingButton(
+            label = stringResource(R.string.my_logout_button),
+            onClick = onLogoutClick,
+            fontSize = 14,
+            padding = 8,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
@@ -101,7 +117,8 @@ private fun PreviewMyScreen() {
     TvingTheme {
         MyScreen(
             id = "밍소",
-            profileImage = ""
+            profileImage = "",
+            onLogoutClick = {}
         )
     }
 }

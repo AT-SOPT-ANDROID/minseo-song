@@ -1,5 +1,6 @@
 package org.sopt.at.presentation.ui.my
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.presentation.ui.signin.ID_KEY
+import org.sopt.at.presentation.ui.signin.SignInActivity
 import org.sopt.at.ui.theme.TvingTheme
 
 @AndroidEntryPoint
@@ -29,6 +31,12 @@ class MyActivity : ComponentActivity() {
                 ) { innerPadding ->
                     MyRoute(
                         id = userId,
+                        navigateSignIn = {
+                            Intent(this, SignInActivity::class.java).apply {
+                                startActivity(this)
+                                finish()
+                            }
+                        },
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
