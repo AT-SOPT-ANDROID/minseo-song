@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
@@ -36,7 +37,9 @@ class SignUpActivity : ComponentActivity() {
 
             TvingTheme {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .imePadding(),
                     topBar = {
                         TvingTopBar(
                             onBackClicked = {
