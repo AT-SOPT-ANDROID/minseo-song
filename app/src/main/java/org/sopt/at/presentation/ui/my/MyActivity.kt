@@ -7,7 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,8 @@ class MyActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize()
+                        .statusBarsPadding()
+                        .navigationBarsPadding()
                         .imePadding(),
                     topBar = {
                         TvingTopBar(isMyPage = true)
