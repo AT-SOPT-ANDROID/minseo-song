@@ -24,7 +24,6 @@ import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.presentation.ui.my.MyActivity
 import org.sopt.at.presentation.ui.signup.SignUpActivity
 import org.sopt.at.ui.theme.TvingTheme
-import kotlin.jvm.java
 
 const val ID_KEY = "id"
 const val PASSWORD_KEY = "password"
@@ -55,8 +54,7 @@ class SignInActivity : ComponentActivity() {
                         .fillMaxSize()
                         .statusBarsPadding()
                         .navigationBarsPadding()
-                        .imePadding()
-                    ,
+                        .imePadding(),
                     topBar = {
                         TvingTopBar()
                     },
@@ -66,9 +64,9 @@ class SignInActivity : ComponentActivity() {
                 ) { innerPadding ->
                     SignInRoute(
                         navigateSignUp = {
-                            Intent(this, SignUpActivity::class.java).apply {
-                                resultLauncher.launch(this)
-                            }
+                            resultLauncher.launch(
+                                Intent(this, SignUpActivity::class.java)
+                            )
                         },
                         navigateMyPage = { id, password ->
                             if (isSignInAvailable(id, password)) {
@@ -77,9 +75,13 @@ class SignInActivity : ComponentActivity() {
                                     startActivity(this)
                                     finish()
                                 }
-                            }else{
+                            } else {
                                 coroutine.launch {
-                                    snackbarHostState.showSnackbar(message = this@SignInActivity.getString(R.string.sign_in_failed))
+                                    snackbarHostState.showSnackbar(
+                                        message = this@SignInActivity.getString(
+                                            R.string.sign_in_failed
+                                        )
+                                    )
                                 }
                             }
                         },
