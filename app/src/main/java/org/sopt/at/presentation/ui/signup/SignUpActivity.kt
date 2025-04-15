@@ -11,12 +11,12 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.at.R
 import org.sopt.at.core.component.button.TvingSignButton
@@ -33,9 +33,9 @@ class SignUpActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val viewModel: SignUpViewModel = hiltViewModel()
-            val signUpState by viewModel.signUpState.collectAsState()
-            val id by viewModel.id.collectAsState()
-            val password by viewModel.password.collectAsState()
+            val signUpState by viewModel.signUpState.collectAsStateWithLifecycle()
+            val id by viewModel.id.collectAsStateWithLifecycle()
+            val password by viewModel.password.collectAsStateWithLifecycle()
 
             TvingTheme {
                 Scaffold(

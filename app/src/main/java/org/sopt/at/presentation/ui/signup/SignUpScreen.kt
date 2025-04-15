@@ -1,12 +1,12 @@
 package org.sopt.at.presentation.ui.signup
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.at.R
 import org.sopt.at.presentation.ui.signup.content.SignUpContent
 import org.sopt.at.ui.theme.TvingTheme
@@ -16,9 +16,9 @@ fun SignUpRoute(
     modifier: Modifier = Modifier,
     viewModel: SignUpViewModel = hiltViewModel()
 ) {
-    val signUpState by viewModel.signUpState.collectAsState()
-    val id by viewModel.id.collectAsState()
-    val password by viewModel.password.collectAsState()
+    val signUpState by viewModel.signUpState.collectAsStateWithLifecycle()
+    val id by viewModel.id.collectAsStateWithLifecycle()
+    val password by viewModel.password.collectAsStateWithLifecycle()
 
     SignUpScreen(
         signUpState = signUpState,
