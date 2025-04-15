@@ -1,11 +1,27 @@
 package org.sopt.at.ui.theme
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val Gray100 = Color(0xFFAAAAAA)
+val Gray200 = Color(0xFF848484)
+val Gray300 = Color(0xFF666668)
+val Gray400 = Color(0xFF2F2F2F)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+@Immutable
+data class TvingColors(
+    val gray100: Color = Gray100,
+    val gray200: Color = Gray200,
+    val gray300: Color = Gray300,
+    val gray400: Color = Gray400
+)
+
+val defaultTvingColors = TvingColors(
+    gray100 = Gray100,
+    gray200 = Gray200,
+    gray300 = Gray300,
+    gray400 = Gray400
+)
+
+val LocalTvingColorsProvider = staticCompositionLocalOf { defaultTvingColors }
