@@ -5,6 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import org.sopt.at.core.util.KeyStorage
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,22 +27,20 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _password.value = newPassword
     }
 
-    fun nextStep(){
+    fun nextStep() {
         if (_signUpState.value == 1) _signUpState.value = 2
     }
 
-    fun previousStep(){
+    fun previousStep() {
         if (_signUpState.value == 2) _signUpState.value = 1
 
     }
 
     fun isIdValid(id: String): Boolean {
-        val regex = Regex("^[a-z0-9]{6,12}$")
-        return regex.matches(id)
+        return KeyStorage.ID_REGEX.matches(id)
     }
 
     fun isPasswordValid(password: String): Boolean {
-        val regex = Regex("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[~!@#\$%^&*])[a-zA-Z\\d~!@#\$%^&*]{8,15}$")
-        return regex.matches(password)
+        return KeyStorage.PASSWORD_REGEX.matches(password)
     }
 }
