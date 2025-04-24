@@ -4,6 +4,8 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
+val White = Color(0xFFFFFFFF)
+val Black = Color(0xFF000000)
 val Gray100 = Color(0xFFAAAAAA)
 val Gray200 = Color(0xFF848484)
 val Gray300 = Color(0xFF666668)
@@ -11,6 +13,8 @@ val Gray400 = Color(0xFF2F2F2F)
 
 @Immutable
 data class TvingColors(
+    val white: Color = White,
+    val black: Color = Black,
     val gray100: Color = Gray100,
     val gray200: Color = Gray200,
     val gray300: Color = Gray300,
@@ -18,6 +22,8 @@ data class TvingColors(
 )
 
 val defaultTvingColors = TvingColors(
+    white = White,
+    black = Black,
     gray100 = Gray100,
     gray200 = Gray200,
     gray300 = Gray300,
