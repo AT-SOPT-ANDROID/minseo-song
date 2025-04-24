@@ -38,7 +38,7 @@ import org.sopt.at.R
 import org.sopt.at.core.component.button.TvingSignButton
 import org.sopt.at.core.component.textfield.PasswordTextField
 import org.sopt.at.core.component.textfield.TvingBasicTextField
-import org.sopt.at.core.component.topbar.TvingTopBar
+import org.sopt.at.core.component.topbar.BackButtonTopBar
 import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
@@ -95,7 +95,7 @@ private fun SignInScreen(
         modifier = modifier
             .fillMaxSize()
             .imePadding(),
-        topBar = { TvingTopBar() },
+        topBar = { BackButtonTopBar() },
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
     ) { innerPadding ->
         Column(

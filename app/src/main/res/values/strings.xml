@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AT SOPT ANDROID</string>
+    <string name="app_name">TVING</string>
 
     <!--bottom bar-->
     <string name="bottom_bar_home">홈</string>
@@ -10,6 +10,7 @@
 
     <!--top bar-->
     <string name="top_bar_back_button_content_description">뒤로가기</string>
+    <string name="top_bar_live_tv_button_content_description">라이브 방송</string>
     <string name="top_bar_notification_button_content_description">알람</string>
     <string name="top_bar_setting_button_content_description">설정</string>
 

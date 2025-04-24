@@ -10,6 +10,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import org.sopt.at.core.navigation.AuthRoute
+import org.sopt.at.core.navigation.MainTabRoute
 import org.sopt.at.presentation.ui.history.navigation.navigateToHistory
 import org.sopt.at.presentation.ui.home.navigation.navigateToHome
 import org.sopt.at.presentation.ui.live.navigation.navigateToLive
@@ -23,7 +24,8 @@ class MainNavigator(
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
-    val startDestination = AuthRoute.SignIn
+//    val startDestination = AuthRoute.SignIn
+    val startDestination = MainTabRoute.Home
 
     val currentTab: MainTab?
         @Composable get() = MainTab.entries.find { tab ->

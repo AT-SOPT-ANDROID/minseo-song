@@ -15,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.at.R
 import org.sopt.at.core.component.button.TvingSignButton
-import org.sopt.at.core.component.topbar.TvingTopBar
+import org.sopt.at.core.component.topbar.BackButtonTopBar
 import org.sopt.at.core.util.toast
 import org.sopt.at.presentation.ui.signup.content.SignUpContent
 import org.sopt.at.ui.theme.TvingTheme
@@ -81,7 +81,7 @@ fun SignUpScreen(
             .fillMaxSize()
             .imePadding(),
         topBar = {
-            TvingTopBar(onBackClicked = onBackClick)
+            BackButtonTopBar(onBackClicked = onBackClick)
         },
         bottomBar = {
             TvingSignButton(

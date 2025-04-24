@@ -29,7 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import org.sopt.at.R
 import org.sopt.at.core.component.button.TvingButton
-import org.sopt.at.core.component.topbar.TvingTopBar
+import org.sopt.at.core.component.topbar.BackButtonTopBar
 import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
@@ -65,7 +65,7 @@ fun MyScreen(
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { TvingTopBar(onBackClicked = onBackClick) },
+        topBar = { BackButtonTopBar(onBackClicked = onBackClick) },
         bottomBar = {
             TvingButton(
                 label = stringResource(R.string.my_logout_button),

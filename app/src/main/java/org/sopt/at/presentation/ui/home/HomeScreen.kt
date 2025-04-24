@@ -1,37 +1,47 @@
 package org.sopt.at.presentation.ui.home
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.ui.theme.TvingTheme
 
 @Composable
 fun HomeRoute(
-    padding: PaddingValues
+    padding: PaddingValues,
+    navigateToMy: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
-    HomeScreen(padding = padding)
+    val profileImage by viewModel.profileImage.collectAsStateWithLifecycle()
+
+    HomeScreen(
+        padding = padding,
+        profileImage = profileImage,
+        navigateToMy = navigateToMy
+    )
 }
 
 @Composable
 private fun HomeScreen(
-    padding: PaddingValues
+    padding: PaddingValues,
+    profileImage: String,
+    navigateToMy: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(padding),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .padding(padding)
     ) {
-        Text(
-            text = "Home Screen"
+        TvingTopBar(
+            profileImage = profileImage,
+            onProfileClick = navigateToMy
         )
     }
 }
@@ -41,7 +51,9 @@ private fun HomeScreen(
 private fun PreviewHistoryScreen() {
     TvingTheme {
         HomeScreen(
-            padding = PaddingValues()
+            padding = PaddingValues(),
+            profileImage = "",
+            navigateToMy = {}
         )
     }
 }

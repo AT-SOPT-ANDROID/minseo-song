@@ -45,7 +45,10 @@ fun MainNavHost(
                 padding = padding,
                 navController = navigator.navController
             )
-            homeNavGraph(padding)
+            homeNavGraph(
+                padding = padding,
+                navController = navigator.navController
+            )
             liveNavGraph(padding)
             searchNavGraph(padding)
             historyNavGraph(padding)
