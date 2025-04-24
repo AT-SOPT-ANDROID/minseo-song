@@ -8,8 +8,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.at.ui.theme.TvingTheme
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity(){
-    override fun onCreate(savedInstanceState: Bundle?){
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {

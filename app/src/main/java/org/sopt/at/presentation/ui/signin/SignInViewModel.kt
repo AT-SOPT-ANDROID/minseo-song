@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(): ViewModel(){
+class SignInViewModel @Inject constructor() : ViewModel() {
     private lateinit var sharedPreferences: SharedPreferences
 
     private val _id = MutableStateFlow<String>("")
@@ -31,7 +31,7 @@ class SignInViewModel @Inject constructor(): ViewModel(){
         _password.value = password
     }
 
-    fun clearData(){
+    fun clearData() {
         _id.value = ""
         _password.value = ""
     }

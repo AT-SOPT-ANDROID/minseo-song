@@ -7,8 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import org.sopt.at.core.navigation.AuthRoute
-import org.sopt.at.presentation.ui.home.navigation.navigateToHome
-import org.sopt.at.presentation.ui.my.navigation.navigateToMy
 import org.sopt.at.presentation.ui.signin.SignInRoute
 import org.sopt.at.presentation.ui.signup.navigation.navigateToSignUp
 

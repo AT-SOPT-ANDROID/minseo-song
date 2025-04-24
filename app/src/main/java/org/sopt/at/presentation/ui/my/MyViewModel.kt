@@ -10,7 +10,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyViewModel @Inject constructor() : ViewModel() {
-    private val _profileImage = MutableStateFlow<String>("https://image.tving.com/upload/profile/IG00000023_IMAGE_12.png/dims/resize/F_webp,400")
+    private val _profileImage =
+        MutableStateFlow<String>("https://image.tving.com/upload/profile/IG00000023_IMAGE_12.png/dims/resize/F_webp,400")
     val profileImage: StateFlow<String> = _profileImage.asStateFlow()
 
     private val _id = MutableStateFlow<String>("")

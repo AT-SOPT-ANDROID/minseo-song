@@ -62,10 +62,10 @@ fun SignInRoute(
         password = password,
         onPasswordChange = viewModel::updatePassword,
         onSignInClick = {
-            if (viewModel.isSignInAvailable()){
+            if (viewModel.isSignInAvailable()) {
                 navigateToHome()
                 viewModel.clearData()
-            } else{
+            } else {
                 coroutine.launch {
                     snackBarHostState.showSnackbar("아이디 또는 비밀번호가 틀렸습니다.")
                 }
@@ -95,7 +95,7 @@ private fun SignInScreen(
         modifier = modifier
             .fillMaxSize()
             .imePadding(),
-        topBar = { TvingTopBar()},
+        topBar = { TvingTopBar() },
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
     ) { innerPadding ->
         Column(

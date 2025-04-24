@@ -33,7 +33,7 @@ fun SignUpContent(
         modifier = modifier
             .padding(horizontal = 20.dp)
             .fillMaxWidth()
-    ){
+    ) {
         Text(
             text = stringResource(R.string.sign_up_title, type),
             color = Color.White,
@@ -58,6 +58,7 @@ fun SignUpContent(
                     fontSize = 12.sp
                 )
             }
+
             else -> {
                 PasswordTextField(
                     value = password,
