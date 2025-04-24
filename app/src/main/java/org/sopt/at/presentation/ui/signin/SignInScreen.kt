@@ -7,13 +7,20 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -26,23 +33,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.launch
 import org.sopt.at.R
 import org.sopt.at.core.component.button.TvingSignButton
 import org.sopt.at.core.component.textfield.PasswordTextField
 import org.sopt.at.core.component.textfield.TvingBasicTextField
+import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
 
 @Composable
 fun SignInRoute(
-    navigateSignUp: () -> Unit,
-    navigateMyPage: (String, String) -> Unit,
+    navigateToSignUp: () -> Unit,
+    navigateToHome: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SignInViewModel = hiltViewModel(),
 ) {
+    viewModel.initPrefs(context = LocalContext.current)
     val id by viewModel.id.collectAsStateWithLifecycle()
     val password by viewModel.password.collectAsStateWithLifecycle()
+    val coroutine = rememberCoroutineScope()
+    val snackBarHostState = remember { SnackbarHostState() }
 
     SignInScreen(
         id = id,
@@ -50,13 +62,21 @@ fun SignInRoute(
         password = password,
         onPasswordChange = viewModel::updatePassword,
         onSignInClick = {
-            navigateMyPage(id, password)
+            if (viewModel.isSignInAvailable()){
+                navigateToHome()
+                viewModel.clearData()
+            } else{
+                coroutine.launch {
+                    snackBarHostState.showSnackbar("아이디 또는 비밀번호가 틀렸습니다.")
+                }
+            }
         },
         onSignUpClick = {
-            navigateSignUp()
+            navigateToSignUp()
             viewModel.clearData()
         },
-        modifier = modifier
+        modifier = modifier,
+        snackBarHostState = snackBarHostState
     )
 }
 
@@ -69,90 +89,100 @@ private fun SignInScreen(
     onSignInClick: () -> Unit,
     onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier,
+    snackBarHostState: SnackbarHostState = remember { SnackbarHostState() }
 ) {
-    Column(
+    Scaffold(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 20.dp)
-    ) {
-        Text(
-            text = stringResource(R.string.sign_in_title),
-            color = Color.White,
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(Modifier.height(20.dp))
-
-        TvingBasicTextField(
-            value = id,
-            onValueChange = onIdChange,
-            hint = stringResource(R.string.textfield_id),
-            imeAction = ImeAction.Next
-        )
-        Spacer(Modifier.height(20.dp))
-
-        PasswordTextField(
-            value = password,
-            onValueChange = onPasswordChange
-        )
-        Spacer(Modifier.height(20.dp))
-
-        TvingSignButton(
-            label = stringResource(R.string.button_sign_in),
-            onClick = onSignInClick,
-            isDisabled = id.isEmpty() || password.isEmpty(),
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(Modifier.height(40.dp))
-
-        Row(
+            .imePadding(),
+        topBar = { TvingTopBar()},
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
+    ) { innerPadding ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 20.dp)
         ) {
             Text(
-                text = stringResource(R.string.button_find_id),
-                color = colors.gray200,
-                fontSize = 16.sp
+                text = stringResource(R.string.sign_in_title),
+                color = Color.White,
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold
             )
-            VerticalDivider(modifier = Modifier.height(22.dp), color = colors.gray300)
+            Spacer(Modifier.height(20.dp))
+
+            TvingBasicTextField(
+                value = id,
+                onValueChange = onIdChange,
+                hint = stringResource(R.string.textfield_id),
+                imeAction = ImeAction.Next
+            )
+            Spacer(Modifier.height(20.dp))
+
+            PasswordTextField(
+                value = password,
+                onValueChange = onPasswordChange
+            )
+            Spacer(Modifier.height(20.dp))
+
+            TvingSignButton(
+                label = stringResource(R.string.button_sign_in),
+                onClick = onSignInClick,
+                isDisabled = id.isEmpty() || password.isEmpty(),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(40.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Text(
+                    text = stringResource(R.string.button_find_id),
+                    color = colors.gray200,
+                    fontSize = 16.sp
+                )
+                VerticalDivider(modifier = Modifier.height(22.dp), color = colors.gray300)
+
+                Text(
+                    text = stringResource(R.string.button_find_password),
+                    color = colors.gray200,
+                    fontSize = 16.sp
+                )
+                VerticalDivider(modifier = Modifier.height(22.dp), color = colors.gray300)
+
+                Text(
+                    text = stringResource(R.string.button_sign_up),
+                    color = colors.gray200,
+                    fontSize = 16.sp,
+                    modifier = Modifier.noRippleClickable(onSignUpClick)
+                )
+            }
+            Spacer(Modifier.height(40.dp))
 
             Text(
-                text = stringResource(R.string.button_find_password),
-                color = colors.gray200,
-                fontSize = 16.sp
-            )
-            VerticalDivider(modifier = Modifier.height(22.dp), color = colors.gray300)
-
-            Text(
-                text = stringResource(R.string.button_sign_up),
-                color = colors.gray200,
-                fontSize = 16.sp,
-                modifier = Modifier.noRippleClickable(onSignUpClick)
+                text = buildAnnotatedString {
+                    append(stringResource(R.string.sign_in_description))
+                    addStyle(
+                        style = SpanStyle(textDecoration = TextDecoration.Underline),
+                        start = 23,
+                        end = 46
+                    )
+                    addStyle(
+                        style = SpanStyle(textDecoration = TextDecoration.Underline),
+                        start = 49,
+                        end = 54
+                    )
+                },
+                color = colors.gray300,
+                fontSize = 12.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
         }
-        Spacer(Modifier.height(40.dp))
-
-        Text(
-            text = buildAnnotatedString {
-                append(stringResource(R.string.sign_in_description))
-                addStyle(
-                    style = SpanStyle(textDecoration = TextDecoration.Underline),
-                    start = 23,
-                    end = 46
-                )
-                addStyle(
-                    style = SpanStyle(textDecoration = TextDecoration.Underline),
-                    start = 49,
-                    end = 54
-                )
-            },
-            color = colors.gray300,
-            fontSize = 12.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
 
