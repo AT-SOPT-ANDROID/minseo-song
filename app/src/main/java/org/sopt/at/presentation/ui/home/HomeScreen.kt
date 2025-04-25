@@ -1,6 +1,7 @@
 package org.sopt.at.presentation.ui.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -37,6 +38,7 @@ import org.sopt.at.core.component.topbar.TvingTopBar
 import org.sopt.at.core.util.noRippleClickable
 import org.sopt.at.domain.model.HomeImage
 import org.sopt.at.domain.type.TvingCategoryType
+import org.sopt.at.domain.type.TvingPlatFormType
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
 
@@ -52,6 +54,7 @@ fun HomeRoute(
     val homeNowPlayingImageList by viewModel.homeNowPlayingImageList.collectAsStateWithLifecycle()
     val categoryList by viewModel.categoryList.collectAsStateWithLifecycle()
     val currentBannerPage by viewModel.currentBannerPage.collectAsStateWithLifecycle()
+    val platFormList by viewModel.platFormList.collectAsStateWithLifecycle()
 
     val pagerState = rememberPagerState(
         pageCount = { homeBannerImageList.size },
@@ -77,6 +80,7 @@ fun HomeRoute(
         profileImage = profileImage,
         categoryList = categoryList,
         pagerState = pagerState,
+        platFormList = platFormList,
         homeBannerImageList = homeBannerImageList,
         homeTop20ImageList = homeTop20ImageList,
         homeNowPlayingImageList = homeNowPlayingImageList,
@@ -91,6 +95,7 @@ private fun HomeScreen(
     profileImage: String,
     categoryList: List<TvingCategoryType>,
     pagerState: PagerState,
+    platFormList: List<TvingPlatFormType>,
     homeBannerImageList: List<HomeImage>,
     homeTop20ImageList: List<HomeImage>,
     homeNowPlayingImageList: List<HomeImage>,
@@ -152,6 +157,37 @@ private fun HomeScreen(
 
             }
         }
+
+        item {
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                items(platFormList.size) {
+                    val platForm = platFormList[it]
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                color = colors.gray400,
+                                shape = RoundedCornerShape(10.dp)
+                            )
+                            .noRippleClickable {}
+                    ) {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(platForm.imageUrl)
+                                .build(),
+                            contentDescription = platForm.title,
+                            modifier = Modifier
+                                .padding(horizontal = 20.dp)
+                                .size(80.dp)
+                        )
+                    }
+                }
+            }
+        }
+
+
     }
 }
 
@@ -164,6 +200,7 @@ private fun PreviewHistoryScreen() {
             profileImage = "",
             categoryList = emptyList(),
             pagerState = rememberPagerState(pageCount = { 0 }),
+            platFormList = emptyList(),
             homeBannerImageList = emptyList(),
             homeTop20ImageList = emptyList(),
             homeNowPlayingImageList = emptyList(),

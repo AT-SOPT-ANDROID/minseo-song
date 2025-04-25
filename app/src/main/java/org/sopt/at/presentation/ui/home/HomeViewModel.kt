@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.at.domain.model.HomeImage
 import org.sopt.at.domain.type.TvingCategoryType
+import org.sopt.at.domain.type.TvingPlatFormType
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,6 +36,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val _currentBannerPage = MutableStateFlow(0)
     val currentBannerPage = _currentBannerPage.asStateFlow()
+
+    private val _platFormList = MutableStateFlow(TvingPlatFormType.entries)
+    val platFormList = _platFormList.asStateFlow()
 
     init {
         loadHomeImages()
