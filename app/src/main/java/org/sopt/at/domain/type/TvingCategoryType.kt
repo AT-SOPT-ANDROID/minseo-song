@@ -1,7 +1,7 @@
 package org.sopt.at.domain.type
 
 enum class TvingCategoryType(
-    description: String
+    val description: String
 ){
     DRAMA("드라마"),
     VARIETY("예능"),
