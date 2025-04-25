@@ -7,13 +7,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.pager.HorizontalPager
@@ -241,6 +238,54 @@ private fun HomeScreen(
                             )
                         }
 
+                    }
+                }
+            }
+        }
+
+        item {
+            Column{
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 15.dp, horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = stringResource(R.string.home_now_playing_title),
+                        fontSize = 20.sp,
+                        color = colors.white,
+                        fontWeight = FontWeight.Bold,
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_now_playing_more),
+                        fontSize = 18.sp,
+                        color = colors.gray200
+                    )
+                }
+
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    modifier = Modifier.padding(bottom = 20.dp)
+                ) {
+                    items(
+                        count = homeNowPlayingImageList.size,
+                        key = { item -> homeNowPlayingImageList[item].imageUrl }
+                    ) { index ->
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(homeNowPlayingImageList[index].imageUrl)
+                                .crossfade(true)
+                                .build(),
+                            contentDescription = homeNowPlayingImageList[index].title,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .size(160.dp, 240.dp)
+                        )
                     }
                 }
             }
