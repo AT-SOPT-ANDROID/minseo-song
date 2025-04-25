@@ -58,6 +58,7 @@ fun HomeRoute(
     val homeTop20ImageList by viewModel.homeTop20ImageList.collectAsStateWithLifecycle()
     val homeNowPlayingImageList by viewModel.homeNowPlayingImageList.collectAsStateWithLifecycle()
     val categoryList by viewModel.categoryList.collectAsStateWithLifecycle()
+    val selectedCategory by viewModel.selectedCategory.collectAsStateWithLifecycle()
     val currentBannerPage by viewModel.currentBannerPage.collectAsStateWithLifecycle()
     val platFormList by viewModel.platFormList.collectAsStateWithLifecycle()
 
@@ -84,6 +85,8 @@ fun HomeRoute(
         padding = padding,
         profileImage = profileImage,
         categoryList = categoryList,
+        selectedCategory = selectedCategory,
+        onSelectCategory = { category -> viewModel.selectCategory(category) },
         pagerState = pagerState,
         platFormList = platFormList,
         homeBannerImageList = homeBannerImageList,
@@ -99,6 +102,8 @@ private fun HomeScreen(
     padding: PaddingValues,
     profileImage: String,
     categoryList: List<TvingCategoryType>,
+    selectedCategory: TvingCategoryType?,
+    onSelectCategory: (TvingCategoryType) -> Unit,
     pagerState: PagerState,
     platFormList: List<TvingPlatFormType>,
     homeBannerImageList: List<HomeImage>,
@@ -132,12 +137,20 @@ private fun HomeScreen(
                 ) {
                     items(categoryList.size) {
                         val category = categoryList[it]
+
+                        val textColor = when {
+                            selectedCategory == null -> colors.white
+                            category == selectedCategory -> colors.white
+                            else -> colors.gray300
+                        }
+
                         Text(
                             text = category.description,
-                            color = colors.white,
+                            color = textColor,
                             fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
                             modifier = Modifier
-                                .noRippleClickable {}
+                                .noRippleClickable { onSelectCategory(category) }
                         )
                     }
                 }
@@ -155,7 +168,7 @@ private fun HomeScreen(
                         .data(homeBannerImageList[index].imageUrl)
                         .crossfade(true)
                         .build(),
-                    contentDescription = "",
+                    contentDescription = homeBannerImageList[index].title,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .clip(RoundedCornerShape(8.dp))
@@ -232,7 +245,7 @@ private fun HomeScreen(
                                 contentDescription = homeTop20ImageList[index].title,
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier
-                                    .padding(20.dp)
+                                    .padding(vertical = 20.dp)
                                     .clip(RoundedCornerShape(8.dp))
                                     .size(160.dp, 240.dp)
                             )
@@ -244,7 +257,7 @@ private fun HomeScreen(
         }
 
         item {
-            Column{
+            Column {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -301,6 +314,8 @@ private fun PreviewHistoryScreen() {
             padding = PaddingValues(),
             profileImage = "",
             categoryList = emptyList(),
+            selectedCategory = TvingCategoryType.DRAMA,
+            onSelectCategory = {},
             pagerState = rememberPagerState(pageCount = { 0 }),
             platFormList = emptyList(),
             homeBannerImageList = emptyList(),
