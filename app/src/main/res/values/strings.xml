@@ -46,4 +46,7 @@
     <string name="my_profile_edit_button">프로필 수정</string>
     <string name="my_logout_button">로그아웃</string>
 
+    <!--Home-->
+    <string name="home_today_top_20_title">오늘의 티빙 TOP 20</string>
+
 </resources>

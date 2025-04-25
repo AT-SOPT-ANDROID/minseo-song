@@ -34,7 +34,7 @@ fun TvingTopBar(
 ) {
     Row(
         modifier = modifier
-            .padding(top = 10.dp, bottom = 10.dp, end = 20.dp)
+            .padding(top = 10.dp, end = 20.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

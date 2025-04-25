@@ -23,10 +23,10 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     val homeBannerImageList = _homeBannerImageList.asStateFlow()
 
     private val _homeTop20ImageList = MutableStateFlow<List<HomeImage>>(emptyList())
-    val homeTop20ImageList = _homeBannerImageList.asStateFlow()
+    val homeTop20ImageList = _homeTop20ImageList.asStateFlow()
 
     private val _homeNowPlayingImageList = MutableStateFlow<List<HomeImage>>(emptyList())
-    val homeNowPlayingImageList = _homeBannerImageList.asStateFlow()
+    val homeNowPlayingImageList = _homeNowPlayingImageList.asStateFlow()
 
     private val _categoryList = MutableStateFlow(TvingCategoryType.entries)
     val categoryList = _categoryList.asStateFlow()
