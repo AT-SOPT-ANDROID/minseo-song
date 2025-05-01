@@ -24,15 +24,22 @@ object TvingTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalTvingColorsProvider.current
+
+    val typography: TvingTypography
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalTvingTypographyProvider.current
 }
 
 @Composable
-fun ProvideTvingColors(
+fun ProvideTvingColorsAndTypography(
     colors: TvingColors,
+    typography: TvingTypography,
     content: @Composable () -> Unit
 ) {
     CompositionLocalProvider(
         LocalTvingColorsProvider provides colors,
+        LocalTvingTypographyProvider provides typography,
         content = content
     )
 }
@@ -41,8 +48,9 @@ fun ProvideTvingColors(
 fun TvingTheme(
     content: @Composable () -> Unit
 ) {
-    ProvideTvingColors(
-        colors = defaultTvingColors
+    ProvideTvingColorsAndTypography(
+        colors = defaultTvingColors,
+        typography = defaultTvingTypography
     ) {
         val view = LocalView.current
         if (!view.isInEditMode) {
