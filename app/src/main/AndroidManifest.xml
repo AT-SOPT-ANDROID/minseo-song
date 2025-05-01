@@ -16,19 +16,7 @@
         android:theme="@style/Theme.ATSOPTANDROID"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.ui.my.MyActivity"
-            android:exported="false"
-            android:label="@string/title_activity_my"
-            android:theme="@style/Theme.ATSOPTANDROID"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".presentation.ui.signup.SignUpActivity"
-            android:exported="false"
-            android:label="@string/title_activity_sigh_up"
-            android:theme="@style/Theme.ATSOPTANDROID"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".presentation.ui.signin.SignInActivity"
+            android:name=".presentation.ui.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ATSOPTANDROID"
             android:windowSoftInputMode="adjustResize">

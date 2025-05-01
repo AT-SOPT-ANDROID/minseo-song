@@ -59,6 +59,9 @@ dependencies {
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.androidx.compose.navigation)
 
+    // Network
+    implementation(libs.kotlinx.serialization.json)
+
     // Coil
     implementation(libs.coil)
 
