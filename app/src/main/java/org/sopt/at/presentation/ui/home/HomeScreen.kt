@@ -46,6 +46,7 @@ import org.sopt.at.domain.type.TvingCategoryType
 import org.sopt.at.domain.type.TvingPlatFormType
 import org.sopt.at.ui.theme.TvingTheme
 import org.sopt.at.ui.theme.TvingTheme.colors
+import org.sopt.at.ui.theme.TvingTheme.typography
 
 @Composable
 fun HomeRoute(
@@ -147,8 +148,7 @@ private fun HomeScreen(
                         Text(
                             text = category.description,
                             color = textColor,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
+                            style = typography.title2.b18,
                             modifier = Modifier
                                 .noRippleClickable { onSelectCategory(category) }
                         )
@@ -213,9 +213,8 @@ private fun HomeScreen(
             ) {
                 Text(
                     text = stringResource(R.string.home_today_top_20_title),
-                    fontSize = 20.sp,
+                    style = typography.title1.b20,
                     color = colors.white,
-                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 20.dp, top = 15.dp)
                 )
 
@@ -267,14 +266,13 @@ private fun HomeScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.home_now_playing_title),
-                        fontSize = 20.sp,
+                        style = typography.title1.b20,
                         color = colors.white,
-                        fontWeight = FontWeight.Bold,
                     )
 
                     Text(
                         text = stringResource(R.string.home_now_playing_more),
-                        fontSize = 18.sp,
+                        style = typography.title2.m18,
                         color = colors.gray200
                     )
                 }
