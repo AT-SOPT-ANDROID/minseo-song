@@ -1,8 +1,11 @@
 package org.sopt.at.domain.repository
 
-import org.sopt.at.domain.model.SignUpInfo
-import org.sopt.at.domain.model.UserInfo
+import org.sopt.at.domain.model.SignInRequestInfo
+import org.sopt.at.domain.model.SignInResponseInfo
+import org.sopt.at.domain.model.SignUpRequestInfo
+import org.sopt.at.domain.model.SignUpResponseInfo
 
 interface AuthRepository {
-    suspend fun signUp(signUpInfo: SignUpInfo): Result<UserInfo>
+    suspend fun signUp(signUpRequestInfo: SignUpRequestInfo): Result<SignUpResponseInfo>
+    suspend fun signIn(signInInfo: SignInRequestInfo): Result<SignInResponseInfo>
 }
