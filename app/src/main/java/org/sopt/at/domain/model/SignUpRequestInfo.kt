@@ -1,6 +1,6 @@
 package org.sopt.at.domain.model
 
-data class SignUpInfo(
+data class SignUpRequestInfo(
     val loginId: String,
     val password: String,
     val nickname: String
