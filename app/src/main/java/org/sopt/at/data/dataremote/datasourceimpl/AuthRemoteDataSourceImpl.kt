@@ -4,6 +4,7 @@ import org.sopt.at.data.dataremote.datasource.AuthRemoteDataSource
 import org.sopt.at.data.dataremote.dto.base.NullableBaseResponse
 import org.sopt.at.data.dataremote.dto.request.SignInRequestDto
 import org.sopt.at.data.dataremote.dto.request.SignUpRequestDto
+import org.sopt.at.data.dataremote.dto.response.GetMyNickNameResponseDto
 import org.sopt.at.data.dataremote.dto.response.SignInResponseDto
 import org.sopt.at.data.dataremote.dto.response.SignUpResponseDto
 import org.sopt.at.data.dataremote.service.AuthService
@@ -17,4 +18,7 @@ class AuthRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun signIn(signInRequestDto: SignInRequestDto): NullableBaseResponse<SignInResponseDto> =
         authService.signIn(signInRequestDto = signInRequestDto)
+
+    override suspend fun getMyNickName(userId: Long): NullableBaseResponse<GetMyNickNameResponseDto> =
+        authService.getMyNickName(userId = userId)
 }
