@@ -3,6 +3,7 @@ package org.sopt.at.data.repositoryimpl
 import org.sopt.at.data.dataremote.datasource.AuthRemoteDataSource
 import org.sopt.at.data.mapper.todata.toData
 import org.sopt.at.data.mapper.todomain.toDomain
+import org.sopt.at.domain.model.GetMyNickNameResponseInfo
 import org.sopt.at.domain.model.SignInRequestInfo
 import org.sopt.at.domain.model.SignInResponseInfo
 import org.sopt.at.domain.model.SignUpRequestInfo
@@ -24,6 +25,12 @@ class AuthRepositoryImpl @Inject constructor(
         runCatching {
             val response = authRemoteDataSource.signIn(signInInfo.toData())
             response.data?.toDomain() ?: throw IllegalStateException("로그인 응답이 null입니다.")
+        }
+
+    override suspend fun getMyNickName(userId: Long): Result<GetMyNickNameResponseInfo> =
+        runCatching {
+            val response = authRemoteDataSource.getMyNickName(userId)
+            response.data?.toDomain() ?: throw IllegalStateException("닉네임 조회 응답이 null입니다.")
         }
 
 
