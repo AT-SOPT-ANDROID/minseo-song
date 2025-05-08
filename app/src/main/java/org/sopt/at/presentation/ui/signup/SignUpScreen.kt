@@ -30,6 +30,7 @@ fun SignUpRoute(
     val signUpState by viewModel.signUpState.collectAsStateWithLifecycle()
     val id by viewModel.id.collectAsStateWithLifecycle()
     val password by viewModel.password.collectAsStateWithLifecycle()
+    val nickname by viewModel.nickname.collectAsStateWithLifecycle()
 
     SignUpScreen(
         signUpState = signUpState,
@@ -37,20 +38,36 @@ fun SignUpRoute(
         onIdChange = viewModel::updateId,
         password = password,
         onPasswordChange = viewModel::updatePassword,
+        nickname = nickname,
+        onNicknameChange = viewModel::updateNickname,
         onNextClick = {
-            if (signUpState == 1) {
-                if (!viewModel.isIdValid(id)) {
-                    context.toast(R.string.sign_up_toast_id)
-                } else {
-                    viewModel.nextStep()
+            when (signUpState) {
+                1 -> {
+                    if (!viewModel.isIdValid(id)) {
+                        context.toast(R.string.sign_up_toast_id)
+                    } else {
+                        viewModel.nextStep()
+                    }
                 }
-            } else {
-                if (!viewModel.isPasswordValid(password)) {
-                    context.toast(R.string.sign_up_toast_password)
-                } else {
-                    viewModel.saveCredentials(context)
-                    viewModel.clearData()
-                    navigateToSignIn()
+
+                2 -> {
+                    if (!viewModel.isPasswordValid(password)) {
+                        context.toast(R.string.sign_up_toast_password)
+                    } else {
+                        viewModel.nextStep()
+                    }
+                }
+
+                3 -> {
+                    viewModel.postSignUp(
+                        onSuccess = {
+                            context.toast(R.string.sign_up_toast_success)
+                            navigateToSignIn()
+                        },
+                        onFailure = {
+                            context.toast(R.string.sign_up_toast_failed)
+                        }
+                    )
                 }
             }
         },
@@ -72,6 +89,8 @@ fun SignUpScreen(
     onIdChange: (String) -> Unit,
     password: String,
     onPasswordChange: (String) -> Unit,
+    nickname: String,
+    onNicknameChange: (String) -> Unit,
     onNextClick: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -90,6 +109,7 @@ fun SignUpScreen(
                 isDisabled = when (signUpState) {
                     1 -> id.isBlank()
                     2 -> password.isBlank()
+                    3 -> nickname.isBlank()
                     else -> true
                 },
                 modifier = Modifier.padding(20.dp)
@@ -103,6 +123,8 @@ fun SignUpScreen(
                 onIdChange = onIdChange,
                 password = password,
                 onPasswordChange = onPasswordChange,
+                nickname = nickname,
+                onNicknameChange = onNicknameChange,
                 modifier = Modifier.padding(innerPadding)
             )
 
@@ -112,6 +134,19 @@ fun SignUpScreen(
                 onIdChange = onIdChange,
                 password = password,
                 onPasswordChange = onPasswordChange,
+                nickname = nickname,
+                onNicknameChange = onNicknameChange,
+                modifier = Modifier.padding(innerPadding)
+            )
+
+            3 -> SignUpContent(
+                type = stringResource(R.string.textfield_nickname),
+                id = id,
+                onIdChange = onIdChange,
+                password = password,
+                onPasswordChange = onPasswordChange,
+                nickname = nickname,
+                onNicknameChange = onNicknameChange,
                 modifier = Modifier.padding(innerPadding)
             )
         }
@@ -127,6 +162,8 @@ fun PreviewSignUpScreen() {
             id = "",
             onIdChange = {},
             password = "",
+            nickname = "",
+            onNicknameChange = {},
             onNextClick = {},
             onBackClick = {},
             onPasswordChange = {}
