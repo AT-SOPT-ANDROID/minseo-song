@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.at.core.util.KeyStorage
-import org.sopt.at.domain.model.SignUpInfo
+import org.sopt.at.domain.model.SignUpRequestInfo
 import org.sopt.at.domain.usecase.PostSignUpUseCase
 import javax.inject.Inject
 
@@ -61,13 +61,13 @@ class SignUpViewModel @Inject constructor(
         onFailure: () -> Unit
     ){
         viewModelScope.launch {
-            val signUpInfo = SignUpInfo(
+            val signUpRequestInfo = SignUpRequestInfo(
                 loginId = id.value,
                 password = password.value,
                 nickname = nickname.value
             )
 
-            postSignUpUseCase(signUpInfo)
+            postSignUpUseCase(signUpRequestInfo)
                 .onSuccess {
                     clearData()
                     onSuccess()
