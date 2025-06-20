@@ -1,21 +1,28 @@
 package org.sopt.at.presentation.ui.signup
 
-import android.content.Context
-import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import org.sopt.at.core.util.KeyStorage
+import org.sopt.at.domain.model.SignUpRequestInfo
+import org.sopt.at.domain.usecase.PostSignUpUseCase
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor() : ViewModel() {
+class SignUpViewModel @Inject constructor(
+    private val postSignUpUseCase: PostSignUpUseCase
+) : ViewModel() {
     private val _id = MutableStateFlow<String>("")
     val id = _id.asStateFlow()
 
     private val _password = MutableStateFlow<String>("")
     val password = _password.asStateFlow()
+
+    private val _nickname = MutableStateFlow<String>("")
+    val nickname = _nickname.asStateFlow()
 
     private val _signUpState = MutableStateFlow<Int>(1)
     val signUpState = _signUpState.asStateFlow()
@@ -28,12 +35,16 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _password.value = newPassword
     }
 
+    fun updateNickname(newNickname: String) {
+        _nickname.value = newNickname
+    }
+
     fun nextStep() {
-        if (_signUpState.value == 1) _signUpState.value = 2
+        if (_signUpState.value != 3) _signUpState.value ++
     }
 
     fun previousStep() {
-        if (_signUpState.value == 2) _signUpState.value = 1
+        if (_signUpState.value != 1) _signUpState.value --
 
     }
 
@@ -45,10 +56,25 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         return KeyStorage.PASSWORD_REGEX.matches(password)
     }
 
-    fun saveCredentials(context: Context) {
-        val prefs = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        prefs.edit() {
-            putString("id", id.value).putString("password", password.value)
+    fun postSignUp(
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit
+    ){
+        viewModelScope.launch {
+            val signUpRequestInfo = SignUpRequestInfo(
+                loginId = id.value,
+                password = password.value,
+                nickname = nickname.value
+            )
+
+            postSignUpUseCase(signUpRequestInfo)
+                .onSuccess {
+                    clearData()
+                    onSuccess()
+                }
+                .onFailure {
+                    onFailure()
+                }
         }
     }
 

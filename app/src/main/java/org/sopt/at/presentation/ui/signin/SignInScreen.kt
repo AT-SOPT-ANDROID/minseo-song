@@ -62,14 +62,16 @@ fun SignInRoute(
         password = password,
         onPasswordChange = viewModel::updatePassword,
         onSignInClick = {
-            if (viewModel.isSignInAvailable()) {
-                navigateToHome()
-                viewModel.clearData()
-            } else {
-                coroutine.launch {
-                    snackBarHostState.showSnackbar("아이디 또는 비밀번호가 틀렸습니다.")
+            viewModel.postSignIn(
+                onSuccess = {
+                    navigateToHome()
+                },
+                onFailure = {
+                    coroutine.launch {
+                        snackBarHostState.showSnackbar("로그인에 실패하였습니다.")
+                    }
                 }
-            }
+            )
         },
         onSignUpClick = {
             navigateToSignUp()

@@ -3,14 +3,21 @@ package org.sopt.at.presentation.ui.signin
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import org.sopt.at.domain.model.SignInRequestInfo
+import org.sopt.at.domain.usecase.PostSignInUseCase
 import javax.inject.Inject
+import androidx.core.content.edit
 
 @HiltViewModel
-class SignInViewModel @Inject constructor() : ViewModel() {
+class SignInViewModel @Inject constructor(
+    private val postSignInUseCase: PostSignInUseCase
+) : ViewModel() {
     private lateinit var sharedPreferences: SharedPreferences
 
     private val _id = MutableStateFlow<String>("")
@@ -31,14 +38,34 @@ class SignInViewModel @Inject constructor() : ViewModel() {
         _password.value = password
     }
 
+    fun postSignIn(
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        viewModelScope.launch {
+            val request = SignInRequestInfo(
+                loginId = id.value,
+                password = password.value
+            )
+
+            postSignInUseCase(request)
+                .onSuccess { response ->
+                    sharedPreferences.edit() {
+                        putInt("userId", response.userId)
+                    }
+
+                    clearData()
+                    onSuccess()
+                }
+                .onFailure {
+                    onFailure(it.message ?: "로그인에 실패했습니다.")
+                }
+        }
+    }
+
+
     fun clearData() {
         _id.value = ""
         _password.value = ""
-    }
-
-    fun isSignInAvailable(): Boolean {
-        val savedId = sharedPreferences.getString("id", "")
-        val savedPassword = sharedPreferences.getString("password", "")
-        return _id.value == savedId && _password.value == savedPassword && _id.value.isNotEmpty() && _password.value.isNotEmpty()
     }
 }

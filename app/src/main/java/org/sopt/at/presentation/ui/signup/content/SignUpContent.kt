@@ -26,6 +26,8 @@ fun SignUpContent(
     onIdChange: (String) -> Unit,
     password: String,
     onPasswordChange: (String) -> Unit,
+    nickname: String,
+    onNicknameChange: (String) -> Unit,
     type: String,
     modifier: Modifier = Modifier
 ) {
@@ -59,6 +61,14 @@ fun SignUpContent(
                 )
             }
 
+            stringResource(R.string.textfield_nickname) -> {
+                TvingBasicTextField(
+                    value = nickname,
+                    onValueChange = onNicknameChange,
+                    hint = stringResource(R.string.textfield_nickname),
+                )
+            }
+
             else -> {
                 PasswordTextField(
                     value = password,
@@ -85,7 +95,9 @@ private fun PreviewSignUpContent() {
             id = "",
             onIdChange = {},
             password = "",
-            onPasswordChange = {}
+            onPasswordChange = {},
+            nickname = "",
+            onNicknameChange = {}
         )
     }
 }

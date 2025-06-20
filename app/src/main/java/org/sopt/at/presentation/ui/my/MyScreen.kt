@@ -1,5 +1,6 @@
 package org.sopt.at.presentation.ui.my
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +13,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,12 +45,21 @@ fun MyRoute(
     viewModel: MyViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
-    viewModel.initId(context)
+    val sharedPrefs = remember { context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE) }
+    val userId = sharedPrefs.getInt("userId", -1)
     val profileImage by viewModel.profileImage.collectAsStateWithLifecycle()
-    val id by viewModel.id.collectAsStateWithLifecycle()
+    val nickname by viewModel.nickname.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        if (userId != -1) {
+            viewModel.getMyNickName(
+                userId = userId.toLong()
+            )
+        }
+    }
 
     MyScreen(
-        id = id,
+        nickname = nickname,
         profileImage = profileImage,
         onLogoutClick = navigateToSignIn,
         onBackClick = navigateToBack,
@@ -57,7 +69,7 @@ fun MyRoute(
 
 @Composable
 fun MyScreen(
-    id: String,
+    nickname: String,
     profileImage: String,
     onLogoutClick: () -> Unit,
     onBackClick: () -> Unit,
@@ -101,7 +113,7 @@ fun MyScreen(
                     )
 
                     Text(
-                        text = id,
+                        text = nickname,
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
@@ -132,7 +144,7 @@ fun MyScreen(
 private fun PreviewMyScreen() {
     TvingTheme {
         MyScreen(
-            id = "밍소",
+            nickname = "밍소",
             profileImage = "",
             onLogoutClick = {},
             onBackClick = {}
